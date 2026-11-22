@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Recommendations | HotelFinder{% endblock %}
+{% block content %}
+<section class="page-banner"><div class="container"><div class="eyebrow">DATA-BASED SHORTLIST</div><h1>Hotel recommendations</h1><p>Hotels ranked by star rating, number of valid rate observations, and median observed rate.</p></div></section>
+<section class="container py-5">{% include "_hotel_cards.html" %}<div class="data-note mt-4">The ratings are based on the hotel reviews and rating of the users.</div></section>
+{% endblock %}

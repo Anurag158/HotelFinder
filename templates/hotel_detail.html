@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}{{ hotel.hotelname }} | HotelFinder{% endblock %}
+{% block content %}
+<section class="page-banner"><div class="container"><div class="eyebrow">HOTEL INFORMATION</div><h1>{{ hotel.hotelname }}</h1><p>{{ hotel.city }}, {{ hotel.country }}</p></div></section>
+<section class="container py-5">
+  <img class="hotel-detail-image mb-4" src="{{ url_for('static', filename='hotel_images/' ~ hotel.image_file) }}" alt="Exterior of {{ hotel.hotelname }}" loading="lazy">
+  <div class="row g-4">
+    <div class="col-lg-8"><div class="detail-panel">
+      <h2 class="h4">Property details</h2>
+      <dl class="row mb-0">
+        <dt class="col-sm-4">Hotel code</dt><dd class="col-sm-8">{{ hotel.hotelcode }}</dd>
+        <dt class="col-sm-4">Star rating</dt><dd class="col-sm-8">{{ hotel.starrating if hotel.starrating is not none else "Not recorded" }}</dd>
+        <dt class="col-sm-4">Address</dt><dd class="col-sm-8">{{ hotel.address or "Not recorded" }}</dd>
+        <dt class="col-sm-4">Property type</dt><dd class="col-sm-8">{{ hotel.propertytype or "Not recorded" }}</dd>
+        <dt class="col-sm-4">Room types</dt><dd class="col-sm-8">{{ hotel.room_types or "Not recorded" }}</dd>
+        <dt class="col-sm-4">Amenities</dt><dd class="col-sm-8">{{ hotel.amenities or "Not recorded" }}</dd>
+      </dl>
+    </div></div>
+    <div class="col-lg-4"><div class="detail-panel">
+      <h2 class="h5">Historical rate summary</h2>
+      {% if hotel.avg_price is not none %}
+        <div class="detail-price">{{ hotel.currency }} {{ "%.2f"|format(hotel.avg_price) }}</div><p class="small text-muted">Average observed listed rate per night</p>
+        <hr><p class="mb-1">Median: <strong>{{ hotel.currency }} {{ "%.2f"|format(hotel.median_price) if hotel.median_price is not none else "N/A" }}</strong></p>
+        <p class="mb-1">Minimum: <strong>{{ hotel.currency }} {{ "%.2f"|format(hotel.min_price) if hotel.min_price is not none else "N/A" }}</strong></p>
+        <p class="mb-1">Maximum: <strong>{{ hotel.currency }} {{ "%.2f"|format(hotel.max_price) if hotel.max_price is not none else "N/A" }}</strong></p>
+        <p class="mb-0">Valid rate records: <strong>{{ hotel.rate_count }}</strong></p>
+      {% else %}<p>No valid rate observations were joined to this hotel.</p>{% endif %}
+      {% if hotel.url %}<a href="{{ hotel.url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary w-100 mt-3">Open source hotel page ↗</a>{% endif %}
+    </div></div>
+  </div>
+  <div class="data-note mt-4">Historical data only: rates were collected in 2019 for stay dates in 2019–2020. They are not current prices or availability.</div>
+  <a href="{{ url_for('search') }}" class="btn btn-link mt-3">← Back to search</a>
+</section>
+{% endblock %}

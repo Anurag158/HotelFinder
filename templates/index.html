@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}HotelFinder | Discover hotels{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <div class="eyebrow text-light">HOTEL DISCOVERY PLATFORM</div>
+        <h1>Find a stay that<br><span>fits your journey.</span></h1>
+        <p class="hero-copy">Search hotel information by destination, property name, rating, and price.</p>
+        <form class="hero-search" action="{{ url_for('search') }}" method="get">
+          <div class="search-input-wrap"><label for="heroQuery">Where do you want to go?</label><input id="heroQuery" name="q" type="search" placeholder="Enter hotel, city, or country"></div>
+          <button class="btn btn-primary btn-lg" type="submit">Search hotels <span aria-hidden="true">→</span></button>
+        </form>
+        <div class="hero-note">Search across {{ "{:,}".format(hotel_count) }} hotel records on the HotelFinder.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container stats-strip">
+  <div class="row g-3">
+    <div class="col-4"><div class="stat-box"><strong>{{ "{:,}".format(hotel_count) }}</strong><span>Hotels</span></div></div>
+    <div class="col-4"><div class="stat-box"><strong>{{ "{:,}".format(city_count) }}</strong><span>Cities</span></div></div>
+    <div class="col-4"><div class="stat-box"><strong>{{ "{:,}".format(country_count) }}</strong><span>Countries</span></div></div>
+  </div>
+</section>
+
+<section class="container section-space">
+  <div class="section-heading">
+    <div><div class="eyebrow">START EXPLORING</div><h2>Find the right hotel</h2><p>Search by hotel name, city, country, price range, or star rating.</p></div>
+    <a href="{{ url_for('search') }}" class="link-arrow">Advanced search →</a>
+  </div>
+  <div class="feature-grid">
+    <a href="{{ url_for('search') }}" class="feature-tile"><span class="tile-icon">⌕</span><div><h3>Search hotels</h3><p>Search property names, destinations, and locations.</p></div><span class="tile-arrow">→</span></a>
+    <a href="{{ url_for('search', has_price=1) }}" class="feature-tile"><span class="tile-icon">₹</span><div><h3>Compare rate data</h3><p>Filter to hotels with recorded historical prices.</p></div><span class="tile-arrow">→</span></a>
+    <a href="{{ url_for('recommend') }}" class="feature-tile"><span class="tile-icon">★</span><div><h3>Recommendations</h3><p>See highly rated hotels with available rate observations.</p></div><span class="tile-arrow">→</span></a>
+  </div>
+</section>
+
+<section class="container section-space">
+  <div class="section-heading"><div><div class="eyebrow"></div><h2>Featured hotels</h2><p>Highest star ratings, with rate-record count used as a tie-breaker.</p></div><a href="{{ url_for('search') }}" class="link-arrow">Browse all →</a></div>
+  {% include "_hotel_cards.html" %}
+</section>
+<div class="container pb-5"><div class="data-note"><strong>About the prices:</strong> the supplied dataset contains booking prices observations collected in 2023 for stay dates in 2023–2025. Prices shown are not current quotes or live availability.</div></div>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}About | HotelFinder{% endblock %}
+
+{% block content %}
+
+<!-- Page Banner -->
+<section class="page-banner">
+    <div class="container">
+        <div class="eyebrow">ABOUT US</div>
+        <h1>About HotelFinder</h1>
+        <p>Discover the right stay for every journey.</p>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="container py-5">
+    <div class="detail-panel">
+        <h2 class="h4 mb-3">Welcome to HotelFinder</h2>
+
+        <p>
+            HotelFinder is a hotel discovery and recommendation platform
+            designed to make finding and exploring hotels easier.
+            Our goal is to help users discover suitable accommodation
+            by providing useful hotel information in one convenient place.
+        </p>
+
+        <p>
+            Whether you are exploring hotels in a new city or comparing
+            different accommodation options, HotelFinder helps you make
+            more informed decisions through organized hotel data.
+        </p>
+
+        <hr class="my-4">
+
+        <h2 class="h4 mb-3">What We Offer</h2>
+
+        <h5>1. Easy Hotel Search</h5>
+        <p>
+            Search for hotels using hotel names, cities, countries,
+            addresses, and property types. Use filters to narrow down
+            results according to star ratings, currencies, and historical
+            price information.
+        </p>
+
+        <h5>2. Hotel Recommendations</h5>
+        <p>
+            Explore recommended hotels based on available dataset
+            information, including star ratings and valid historical
+            rate records.
+        </p>
+
+        <h5>3. Detailed Hotel Information</h5>
+        <p>
+            Explore hotel locations, property types, room information,
+            amenities, ratings, and other available details.
+        </p>
+
+        <h5>4. Price Information</h5>
+        <p>
+            Compare historical average, minimum, and maximum observed
+            hotel rates to understand the price information available
+            in the dataset.
+        </p>
+
+        <hr class="my-4">
+
+        <h2 class="h4 mb-3">Our Mission</h2>
+        <p>
+            Our mission is to simplify hotel discovery by making hotel
+            information easier to access, understand, and compare.
+            We aim to provide a user-friendly platform that helps
+            travellers explore accommodation options efficiently.
+        </p>
+
+        <hr class="my-4">
+
+        <h2 class="h4 mb-3">Our Commitment</h2>
+        <p>
+            We are committed to presenting hotel information in a clear,
+            organized, and accessible way. We continuously aim to improve
+            the hotel discovery experience through useful features and
+            data-driven functionality.
+        </p>
+
+        <div class="data-note mt-4">
+            <strong>Data transparency:</strong>
+            Hotel rate information displayed on this platform comes from
+            historical observations collected during 2023–2025.
+            These values are not live booking prices or current availability.
+        </div>
+
+        <div class="text-center mt-5">
+            <h4 class="fw-bold">HotelFinder</h4>
+            <p class="text-muted mb-0">
+                Explore Hotels. Compare Options. Find Your Stay.
+            </p>
+            <a href="{{ url_for('search') }}" class="btn btn-primary mt-3">
+                Explore Hotels
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

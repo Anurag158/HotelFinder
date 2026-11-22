@@ -1,0 +1,35 @@
+<div class="row g-4">
+{% for hotel in hotels %}
+  <div class="col-sm-6 col-xl-4">
+    <article class="hotel-card h-100">
+      <div class="hotel-card-top">
+        <img class="hotel-card-image" src="{{ url_for('static', filename='hotel_images/' ~ hotel.image_file) }}" alt="Exterior of {{ hotel.hotelname }}" loading="lazy">
+        <span class="rating-pill">{% if hotel.starrating %}{{ hotel.starrating|round|int }} ★{% else %}Unrated{% endif %}</span>
+      </div>
+      <div class="p-4 d-flex flex-column flex-grow-1">
+        <div class="small text-uppercase text-muted fw-semibold mb-2">{{ hotel.country }}</div>
+        <h3 class="h5 mb-2">{{ hotel.hotelname }}</h3>
+        <p class="text-muted small mb-3">{{ hotel.address or hotel.city ~ ", " ~ hotel.country }}</p>
+        <div class="hotel-facts mb-3">
+          <span><strong>{{ hotel.rate_count }}</strong> ratings</span>
+          <span><strong>{{ hotel.room_types|length if hotel.room_types else 0 }}</strong> rooms</span>
+        </div>
+        <div class="mt-auto d-flex justify-content-between align-items-center">
+          <div>
+            {% if hotel.avg_price is not none %}
+              <div class="price-value">{{ hotel.currency }} {{ "%.2f"|format(hotel.avg_price) }}</div>
+              <div class="small text-muted"> average / night</div>
+            {% else %}
+              <div class="fw-semibold">Price unavailable</div>
+              <div class="small text-muted">No rating record</div>
+            {% endif %}
+          </div>
+          <a class="btn btn-outline-primary btn-sm" href="{{ url_for('hotel_detail', hotelcode=hotel.hotelcode) }}">Details</a>
+        </div>
+      </div>
+    </article>
+  </div>
+{% else %}
+  <div class="col-12"><div class="empty-state">No hotels found. Try changing your filters.</div></div>
+{% endfor %}
+</div>
